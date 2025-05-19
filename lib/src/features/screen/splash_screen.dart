@@ -22,7 +22,7 @@ class SplashScreenState extends State<SplashScreen>
     super.initState();
 
     _slideController =
-        AnimationController(vsync: this, duration: Duration(seconds: 5))
+        AnimationController(vsync: this, duration: Duration(seconds: 3))
           ..forward().whenComplete(() {
             Future.delayed(Duration(milliseconds: 300), () {
               _slideController.reverse();
@@ -48,7 +48,7 @@ class SplashScreenState extends State<SplashScreen>
 
     _colorController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 5),
+      duration: Duration(seconds: 3),
     )..repeat(reverse: true);
 
     _colorAnimation = ColorTween(

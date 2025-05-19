@@ -14,6 +14,17 @@ class MockDatabaseRepository implements DatabaseRepository {
   List<UsersFav> favorites = [];
   List<Chord> allChords = [
     Chord(chordName: 'A', assetImagePath: 'assets/chords/A.png'),
+    Chord(chordName: 'A7', assetImagePath: 'assets/chords/A7.png'),
+    Chord(chordName: 'Asus2', assetImagePath: 'assets/chords/Asus2.png'),
+    Chord(chordName: 'Asus4', assetImagePath: 'assets/chords/Asus4.png'),
+    Chord(chordName: 'A7sus4', assetImagePath: 'assets/chords/A7sus4.png'),
+    Chord(chordName: 'A7sus2', assetImagePath: 'assets/chords/A7sus2.png'),
+    Chord(chordName: 'Am7', assetImagePath: 'assets/chords/Am7.png'),
+    Chord(chordName: 'A5', assetImagePath: 'assets/chords/A5.png'),
+    Chord(chordName: 'A6', assetImagePath: 'assets/chords/A6.png'),
+    Chord(chordName: 'Am6', assetImagePath: 'assets/chords/Am6.png'),
+    Chord(chordName: 'Amaj7', assetImagePath: 'assets/chords/Amaj7.png'),
+    Chord(chordName: 'A°', assetImagePath: 'assets/chords/A°.png'),
     Chord(chordName: 'Am', assetImagePath: 'assets/chords/Am.png'),
     Chord(chordName: 'A+', assetImagePath: 'assets/chords/A+.png'),
     Chord(chordName: 'B', assetImagePath: 'assets/chords/B.png'),
