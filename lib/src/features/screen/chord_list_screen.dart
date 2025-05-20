@@ -81,7 +81,7 @@ class _ChordListScreenState extends State<ChordListScreen> {
                   mainAxisSpacing: 8.0,
                   childAspectRatio: 1.0,
                 ),
-                itemCount: ChordList.allChordNames.length,
+                itemCount: widget.myRepository.getAllChords().length,
                 itemBuilder: (context, index) {
                   final chordName = ChordList.allChordNames[index];
                   return GestureDetector(
