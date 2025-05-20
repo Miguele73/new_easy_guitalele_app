@@ -27,7 +27,7 @@ class EasyGuitaleleApp extends StatelessWidget {
             (context) => ScaleSelectionScreen(myRepository),
         '/chordListScreen': (context) => ChordListScreen(myRepository),
       },
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       home: SplashScreen(myRepository),
     );
   }
