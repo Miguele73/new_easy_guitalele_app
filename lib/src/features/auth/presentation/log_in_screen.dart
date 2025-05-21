@@ -15,6 +15,11 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
+  // TextEditingController _emailController = TextEditingController();
+  // TextEditingController _passwordController = TextEditingController();
+  // final _formKey = GlobalKey<FormState>();
+  // final _emailFocusNode = FocusNode();
+  // final _passwordFocusNode = FocusNode();
   bool _isObscured = true;
 
   @override
