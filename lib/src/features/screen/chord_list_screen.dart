@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/chord/chord.dart';
 // ignore: library_prefixes
-import 'package:new_easy_guitalele_app/src/features/auth/chord/chord.dart'
-    // ignore: library_prefixes
-    as ChordList;
+
+// ignore: library_prefixes
+
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/desicions_box.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/my_app_bar.dart';
 
@@ -16,7 +17,7 @@ class ChordListScreen extends StatefulWidget {
 }
 
 class _ChordListScreenState extends State<ChordListScreen> {
-  void _showChordDiagram(String chordName) {
+  void _showChordDiagram(Chord chord) {
     setState(() {});
     showDialog(
       context: context,
@@ -29,12 +30,12 @@ class _ChordListScreenState extends State<ChordListScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (ChordList.chordImageMap.containsKey(chordName))
-                    Image.asset(ChordList.chordImageMap[chordName]!),
+                  // if (ChordList.chordImageMap.containsKey(chordName))
+                  Image.asset(chord.assetImagePath),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      chordName,
+                      chord.chordName,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -57,6 +58,7 @@ class _ChordListScreenState extends State<ChordListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<Chord> allChords = widget.myRepository.getAllChords();
     return Scaffold(
       backgroundColor: const Color(0xFF505160),
       appBar: MyAppBar(automaticallyImplyLeading: true),
@@ -83,9 +85,9 @@ class _ChordListScreenState extends State<ChordListScreen> {
                 ),
                 itemCount: widget.myRepository.getAllChords().length,
                 itemBuilder: (context, index) {
-                  final chordName = ChordList.allChordNames[index];
+                  final chord = allChords[index];
                   return GestureDetector(
-                    onTap: () => _showChordDiagram(chordName),
+                    onTap: () => _showChordDiagram(chord),
                     child: Container(
                       decoration: BoxDecoration(
                         color: const Color(0xFFBCBABE),
@@ -93,7 +95,7 @@ class _ChordListScreenState extends State<ChordListScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          chordName,
+                          chord.chordName,
                           textAlign: TextAlign.center,
                           style: const TextStyle(fontWeight: FontWeight.bold),
                           overflow: TextOverflow.ellipsis,

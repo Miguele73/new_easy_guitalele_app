@@ -15,8 +15,8 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  // TextEditingController _emailController = TextEditingController();
-  // TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   // final _formKey = GlobalKey<FormState>();
   // final _emailFocusNode = FocusNode();
   // final _passwordFocusNode = FocusNode();
@@ -49,6 +49,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       labelText: "Email",
                       hintText: "Email eingeben",
@@ -65,6 +66,7 @@ class _LogInScreenState extends State<LogInScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: _passwordController,
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
                       color: Colors.white,
