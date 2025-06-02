@@ -171,32 +171,38 @@ class MockDatabaseRepository implements DatabaseRepository {
   ];
 
   @override
-  List<Song> getSongs() {
+  Future<List<Song>> getSongs() async {
+    await Future.delayed(const Duration(seconds: 5));
     return songs;
   }
 
   @override
-  List<ChordSong> getChordSongs() {
+  Future<List<ChordSong>> getChordSongs() async {
+    await Future.delayed(const Duration(seconds: 5));
     return chordSongs;
   }
 
   @override
-  List<TabsSong> getTabsSongs() {
+  Future<List<TabsSong>> getTabsSongs() async {
+    await Future.delayed(const Duration(seconds: 5));
     return tabsSongs;
   }
 
   @override
-  List<UsersFav> getUsersFavs() {
+  Future<List<UsersFav>> getUsersFavs() async {
+    await Future.delayed(const Duration(seconds: 5));
     return favorites;
   }
 
   @override
-  List<Chord> getAllChords() {
+  Future<List<Chord>> getAllChords() async {
+    await Future.delayed(const Duration(seconds: 5));
     return allChords;
   }
 
   @override
-  void addSongToFavorites(Song song) {
+  Future<void> addSongToFavorites(Song song) async {
+    await Future.delayed(const Duration(seconds: 5));
     for (UsersFav fav in favorites) {
       if (fav.song.title == song.title) {
         return;

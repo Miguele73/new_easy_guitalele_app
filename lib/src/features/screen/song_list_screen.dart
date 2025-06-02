@@ -15,6 +15,15 @@ class SongListScreen extends StatefulWidget {
 }
 
 class _SongListScreenState extends State<SongListScreen> {
+  Future<List<Song>>? _songs;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the future to fetch songs from the repository
+    _songs = widget.myRepository.getSongs();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,42 +44,102 @@ class _SongListScreenState extends State<SongListScreen> {
               ),
               const SizedBox(height: 20),
               Expanded(
-                child: ListView.builder(
-                  shrinkWrap: false,
-                  itemCount: widget.myRepository.getSongs().length,
-                  itemBuilder: (context, index) {
-                    final Song currentSong =
-                        widget.myRepository.getSongs()[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Card(
-                        color: const Color(0xFFBCBABE),
-                        child: ListTile(
-                          title: Text(currentSong.title),
-                          subtitle: Text(currentSong.artist?.name ?? ''),
-                          trailing: Text(
-                            currentSong.difficulty.toString().split('.').last,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          leading: Image.asset(
-                            currentSong.coverUrl,
-                            // fit: BoxFit.cover,
-                          ),
-                          // leading: const Icon(Icons.music_note),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => SongDetailSelectionScreen(
-                                      songName: currentSong.title,
+                child: FutureBuilder(
+                  future: _songs,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Center(child: Text('No songs available.'));
+                    } else {
+                      // If data is available, build the ListView
+                      return ListView.builder(
+                        shrinkWrap: false,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          final Song currentSong = snapshot.data![index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                            ),
+                            child: Card(
+                              color: const Color(0xFFBCBABE),
+                              child: ListTile(
+                                title: Text(currentSong.title),
+                                subtitle: Text(currentSong.artist?.name ?? ''),
+                                trailing: Text(
+                                  currentSong.difficulty
+                                      .toString()
+                                      .split('.')
+                                      .last,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                leading: Image.asset(
+                                  currentSong.coverUrl,
+                                  // fit: BoxFit.cover,
+                                ),
+                                // leading: const Icon(Icons.music_note),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (context) =>
+                                              SongDetailSelectionScreen(
+                                                songName: currentSong.title,
+                                              ),
                                     ),
+                                  );
+                                },
                               ),
-                            );
-                          },
-                        ),
-                      ),
-                    );
+                            ),
+                          );
+                        },
+                      );
+
+                      // return:ListView.builder(
+                      //   shrinkWrap: false,
+                      //   itemCount: widget.myRepository.getSongs().length,
+                      //   itemBuilder: (context, index) {
+                      //     final Song currentSong =
+                      //         widget.myRepository.getSongs()[index];
+                      //     return Padding(
+                      //       padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      //       child: Card(
+                      //         color: const Color(0xFFBCBABE),
+                      //         child: ListTile(
+                      //           title: Text(currentSong.title),
+                      //           subtitle: Text(currentSong.artist?.name ?? ''),
+                      //           trailing: Text(
+                      //             currentSong.difficulty.toString().split('.').last,
+                      //             style: const TextStyle(fontWeight: FontWeight.bold),
+                      //           ),
+                      //           leading: Image.asset(
+                      //             currentSong.coverUrl,
+                      //             // fit: BoxFit.cover,
+                      //           ),
+                      //           // leading: const Icon(Icons.music_note),
+                      //           onTap: () {
+                      //             Navigator.push(
+                      //               context,
+                      //               MaterialPageRoute(
+                      //                 builder:
+                      //                     (context) => SongDetailSelectionScreen(
+                      //                       songName: currentSong.title,
+                      //                     ),
+                      //               ),
+                      //             );
+                      //           },
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // );
+                    }
                   },
                 ),
               ),

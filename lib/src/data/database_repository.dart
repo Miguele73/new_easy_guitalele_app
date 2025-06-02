@@ -5,10 +5,10 @@ import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/us
 import 'package:new_easy_guitalele_app/src/features/auth/song/song.dart';
 
 abstract class DatabaseRepository {
-  List<Song> getSongs();
-  List<Chord> getAllChords();
-  List<ChordSong> getChordSongs();
-  List<TabsSong> getTabsSongs();
-  List<UsersFav> getUsersFavs();
-  void addSongToFavorites(Song song);
+  Future<List<Song>> getSongs();
+  Future<List<Chord>> getAllChords();
+  Future<List<ChordSong>> getChordSongs();
+  Future<List<TabsSong>> getTabsSongs();
+  Future<List<UsersFav>> getUsersFavs();
+  Future<void> addSongToFavorites(Song song);
 }
