@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
-import 'package:new_easy_guitalele_app/src/features/auth/presentation/login_app_bar.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/login_app_bar.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/desicion_screen.dart';
 import 'package:new_easy_guitalele_app/src/theme/app_colors.dart';
 

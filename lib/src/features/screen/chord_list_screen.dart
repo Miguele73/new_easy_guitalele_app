@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/chord/chord.dart';
-// ignore: library_prefixes
-
-// ignore: library_prefixes
 
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/desicions_box.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/my_app_bar.dart';
@@ -30,7 +27,6 @@ class _ChordListScreenState extends State<ChordListScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // if (ChordList.chordImageMap.containsKey(chordName))
                   Image.asset(chord.assetImagePath),
                   Padding(
                     padding: const EdgeInsets.all(16.0),

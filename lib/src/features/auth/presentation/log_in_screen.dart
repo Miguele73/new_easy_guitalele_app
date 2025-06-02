@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
-import 'package:new_easy_guitalele_app/src/features/auth/presentation/login_app_bar.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/login_app_bar.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/sign_in_screen.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/desicion_screen.dart';
 import 'package:new_easy_guitalele_app/src/theme/app_colors.dart';
@@ -17,9 +17,7 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  // final _formKey = GlobalKey<FormState>();
-  // final _emailFocusNode = FocusNode();
-  // final _passwordFocusNode = FocusNode();
+
   bool _isObscured = true;
 
   @override
