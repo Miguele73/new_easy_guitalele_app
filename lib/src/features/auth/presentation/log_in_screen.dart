@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/forgot_password_screen.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/login_app_bar.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/sign_in_screen.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/desicion_screen.dart';
@@ -93,7 +94,14 @@ class _LogInScreenState extends State<LogInScreen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ForgotPasswordScreen(),
+                      ),
+                    );
+                  },
                   style: TextButton.styleFrom(
                     foregroundColor: AppColors.text,
                     textStyle: TextStyle(
@@ -117,7 +125,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder:
