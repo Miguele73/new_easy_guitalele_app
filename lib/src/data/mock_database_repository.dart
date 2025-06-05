@@ -9,7 +9,7 @@ import 'database_repository.dart';
 
 class MockDatabaseRepository implements DatabaseRepository {
   final Map<String, String> _users = {
-    'miguele73@web.de': 'Bellheim',
+    'miguele73@web.de': 'Bellheim1',
     'a.stenner@web.de': 'Porsche53',
   };
 
