@@ -8,7 +8,11 @@ import 'package:new_easy_guitalele_app/src/features/auth/song/song.dart';
 import 'database_repository.dart';
 
 class MockDatabaseRepository implements DatabaseRepository {
-  // Simulierte Datenbank
+  final Map<String, String> _users = {
+    'miguele73@web.de': 'Bellheim',
+    'a.stenner@web.de': 'Porsche53',
+  };
+
   List<ChordSong> chordSongs = [];
   List<TabsSong> tabsSongs = [];
   List<UsersFav> favorites = [];
@@ -211,5 +215,43 @@ class MockDatabaseRepository implements DatabaseRepository {
 
     UsersFav newFav = UsersFav(song: song, isChordSong: song is ChordSong);
     favorites.add(newFav);
+  }
+
+  @override
+  Future<bool> loginUser(String email, String password) async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (_users.containsKey(email) && _users[email] == password) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> isUserLoggedIn() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> registerUser(String email, String password) async {
+    await Future.delayed(const Duration(seconds: 2));
+    if (_users.containsKey(email)) {
+      return false;
+    } else {
+      _users[email] = password;
+
+      return true;
+    }
+  }
+
+  @override
+  Future<void> resetPassword(String email) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> signOut() {
+    throw UnimplementedError();
   }
 }

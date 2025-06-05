@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:new_easy_guitalele_app/src/theme/app_colors.dart'; // Stelle sicher, dass der Pfad korrekt ist
+import 'package:new_easy_guitalele_app/src/theme/app_colors.dart';
 
 class CustomFilledButton extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final VoidCallback onPressed;
-  final IconData? icon; // Optional für Buttons mit Icon
-  final Color textColor; // Für Textfarbe des Buttons
+  final IconData? icon;
+  final Color textColor;
 
   const CustomFilledButton({
     super.key,
     required this.text,
     required this.onPressed,
-    this.backgroundColor = AppColors.button, // Standardfarbe
+    this.backgroundColor = AppColors.button,
     this.icon,
-    this.textColor = AppColors.white, // Standard Textfarbe
+    this.textColor = AppColors.white,
   });
 
   @override
@@ -35,12 +35,9 @@ class CustomFilledButton extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize:
-                  MainAxisSize
-                      .min, // Damit die Row nicht zu viel Platz einnimmt
+              mainAxisSize: MainAxisSize.min,
               children: [
                 if (icon != null) ...[
-                  // Nur wenn ein Icon vorhanden ist
                   Icon(icon, color: textColor),
                   const SizedBox(width: 8.0),
                 ],

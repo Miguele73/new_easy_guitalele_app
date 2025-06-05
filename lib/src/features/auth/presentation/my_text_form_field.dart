@@ -8,7 +8,7 @@ class MyTextFormField extends StatelessWidget {
   final bool obscureText;
   final TextInputType keyboardType;
   final Widget? suffixIcon;
-  final FormFieldValidator<String>? validator;
+  final String? Function(String?)? validator;
   const MyTextFormField({
     super.key,
     required this.labelText,
@@ -28,7 +28,7 @@ class MyTextFormField extends StatelessWidget {
         controller: controller,
         obscureText: obscureText,
         keyboardType: keyboardType,
-        validator: validator,
+
         decoration: InputDecoration(
           labelText: labelText,
           hintText: hintText,
@@ -39,7 +39,10 @@ class MyTextFormField extends StatelessWidget {
             color: AppColors.text,
           ),
           suffixIcon: suffixIcon,
+          errorStyle: const TextStyle(fontSize: 10, color: Colors.red),
         ),
+        validator: validator,
+        style: TextStyle(fontSize: 10, color: AppColors.text),
       ),
     );
   }

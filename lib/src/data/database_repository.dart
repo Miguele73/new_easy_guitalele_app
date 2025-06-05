@@ -11,4 +11,10 @@ abstract class DatabaseRepository {
   Future<List<TabsSong>> getTabsSongs();
   Future<List<UsersFav>> getUsersFavs();
   Future<void> addSongToFavorites(Song song);
+
+  Future<bool> loginUser(String email, String password);
+  Future<bool> registerUser(String email, String password);
+  Future<void> resetPassword(String email);
+  Future<bool> isUserLoggedIn();
+  Future<void> signOut();
 }
