@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
-import 'package:new_easy_guitalele_app/src/features/auth/presentation/forgot_password_screen.dart';
-import 'package:new_easy_guitalele_app/src/features/auth/presentation/my_text_form_field.dart';
-import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/custom_filled_button.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/login_app_bar.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/login_form.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/sign_up_prompt.dart';
