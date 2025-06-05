@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/forgot_password_screen.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/my_text_form_field.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/custom_filled_button.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/login_app_bar.dart';
-import 'package:new_easy_guitalele_app/src/features/auth/presentation/sign_in_screen.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/sign_up_prompt.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/desicion_screen.dart';
 import 'package:new_easy_guitalele_app/src/theme/app_colors.dart';
 
@@ -34,7 +36,7 @@ class _LogInScreenState extends State<LogInScreen> {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
-            spacing: 8,
+            spacing: 2,
             children: [
               Text(
                 "Hi, schön, dass du da bist!",
@@ -47,48 +49,32 @@ class _LogInScreenState extends State<LogInScreen> {
               SizedBox(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
+                  child: MyTextFormField(
+                    labelText: 'Email',
+                    hintText: 'Email eingeben',
                     controller: _emailController,
-                    decoration: InputDecoration(
-                      labelText: "Email",
-                      hintText: "Email eingeben",
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                        color: AppColors.text,
-                      ),
-                    ),
+                    keyboardType: TextInputType.emailAddress,
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
+                child: MyTextFormField(
+                  labelText: 'Passwort',
+                  hintText: 'Passwort eingeben',
                   controller: _passwordController,
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      color: Colors.white,
-                      onPressed: () {
-                        setState(() {
-                          _isObscured = !_isObscured;
-                        });
-                      },
-                      icon: Icon(
-                        size: 24,
-                        _isObscured ? Icons.visibility : Icons.visibility_off,
-                      ),
-                    ),
-                    labelText: "Passwort",
-                    hintText: "Passwort eingeben",
-                    border: OutlineInputBorder(),
-                    labelStyle: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal,
+                  obscureText: _isObscured,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isObscured ? Icons.visibility : Icons.visibility_off,
                       color: AppColors.text,
                     ),
+                    onPressed: () {
+                      setState(() {
+                        _isObscured = !_isObscured;
+                      });
+                    },
                   ),
-                  obscureText: _isObscured,
                 ),
               ),
               Align(
@@ -113,36 +99,22 @@ class _LogInScreenState extends State<LogInScreen> {
                   child: Text("Passwort vergessen?"),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: FilledButton(
-                    style: FilledButton.styleFrom(
-                      backgroundColor: AppColors.button,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+
+              CustomFilledButton(
+                text: "Login",
+                backgroundColor: AppColors.button,
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DesicionScreen(widget.myRepository),
                     ),
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => DesicionScreen(widget.myRepository),
-                        ),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text("Login"),
-                    ),
-                  ),
-                ),
+                  );
+                },
               ),
 
               Row(
-                spacing: 16,
+                spacing: 8,
                 children: [
                   Expanded(child: Divider()),
                   Text("oder"),
@@ -150,160 +122,53 @@ class _LogInScreenState extends State<LogInScreen> {
                 ],
               ),
 
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: FilledButton(
-                    style: FilledButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+              CustomFilledButton(
+                text: "Login mit Apple",
+                backgroundColor: Colors.black,
+                icon: Icons.apple,
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DesicionScreen(widget.myRepository),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => DesicionScreen(widget.myRepository),
-                        ),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.apple, color: Colors.white),
-                          const SizedBox(width: 8.0),
-                          const Text(
-                            "Login mit Apple",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                  );
+                },
               ),
 
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: FilledButton(
-                    style: FilledButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+              CustomFilledButton(
+                text: "Login mit Facebook",
+                backgroundColor: Colors.blue,
+                icon: Icons.facebook,
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DesicionScreen(widget.myRepository),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => DesicionScreen(widget.myRepository),
-                        ),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.facebook, color: Colors.white),
-                          const SizedBox(width: 8.0),
-                          const Text(
-                            "Login mit Facebook",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                  );
+                },
               ),
 
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: FilledButton(
-                    style: FilledButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+              CustomFilledButton(
+                text: "Login mit Google",
+                backgroundColor: Colors.white,
+                icon: Icons.g_mobiledata_rounded,
+                textColor: Colors.black,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DesicionScreen(widget.myRepository),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => DesicionScreen(widget.myRepository),
-                        ),
-                      );
-                    },
-
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.g_mobiledata_rounded,
-                            color: Colors.black,
-                          ),
-                          const SizedBox(width: 8.0),
-                          const Text(
-                            "Login mit Google",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                  );
+                },
               ),
+
               Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 8,
-                children: [
-                  Text(
-                    "Du hast noch keinen Account?",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal,
-                      color: AppColors.scales,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => SignInScreen(widget.myRepository),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "Registrieren",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                        color: AppColors.text,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              SignUpPrompt(myRepository: widget.myRepository),
             ],
           ),
         ),

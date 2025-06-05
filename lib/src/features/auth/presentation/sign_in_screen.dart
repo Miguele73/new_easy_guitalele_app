@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/my_text_form_field.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/login_app_bar.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/desicion_screen.dart';
 import 'package:new_easy_guitalele_app/src/theme/app_colors.dart';
@@ -40,32 +41,18 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Email",
-                    hintText: "Email eingeben",
-                    border: OutlineInputBorder(),
-                    labelStyle: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal,
-                      color: AppColors.text,
-                    ),
-                  ),
+                child: MyTextFormField(
+                  controller: TextEditingController(),
+                  labelText: 'Bitte E-Mail Adresse eingeben',
+                  hintText: 'E-Mail eingeben',
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Email wiederholen",
-                    hintText: "Email erneut eingeben",
-                    border: OutlineInputBorder(),
-                    labelStyle: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal,
-                      color: AppColors.text,
-                    ),
-                  ),
+                child: MyTextFormField(
+                  controller: TextEditingController(),
+                  labelText: 'Bitte E-Mail Adresse wiederholen',
+                  hintText: 'E-Mail wiederholen',
                 ),
               ),
               Padding(
@@ -109,7 +96,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder:
@@ -146,7 +133,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder:
@@ -185,7 +172,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder:
@@ -224,7 +211,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder:
