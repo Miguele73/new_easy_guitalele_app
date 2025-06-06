@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
 import 'package:new_easy_guitalele_app/src/theme/app_colors.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/my_app_bar.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/forgot_password_form.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+  final DatabaseRepository myRepository;
+  const ForgotPasswordScreen(this.myRepository, {super.key});
 
   @override
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
@@ -36,7 +38,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     try {
       await Future.delayed(const Duration(seconds: 2));
 
-      bool success = true;
+      bool success = await widget.myRepository.resetPassword(email);
 
       if (mounted) {
         Navigator.of(context).pop();

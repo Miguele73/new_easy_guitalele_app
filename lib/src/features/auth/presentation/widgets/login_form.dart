@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/forgot_password_screen.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/my_text_form_field.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/custom_filled_button.dart';
@@ -10,6 +11,7 @@ class LoginForm extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final Future<void> Function() onLoginPressed;
+  final DatabaseRepository myRepository;
 
   const LoginForm({
     super.key,
@@ -17,6 +19,7 @@ class LoginForm extends StatefulWidget {
     required this.emailController,
     required this.passwordController,
     required this.onLoginPressed,
+    required this.myRepository,
   });
 
   @override
@@ -26,7 +29,6 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   bool _isObscured = true;
 
-  // Validierungsfunktionen hierher verschieben
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Bitte gib deine E-Mail-Adresse ein.';
@@ -99,7 +101,11 @@ class _LoginFormState extends State<LoginForm> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ForgotPasswordScreen(),
+                    builder:
+                        (context) => ForgotPasswordScreen(
+                          widget.myRepository,
+                          key: Key('forgot_password_screen'),
+                        ),
                   ),
                 );
               },
@@ -117,7 +123,7 @@ class _LoginFormState extends State<LoginForm> {
           CustomFilledButton(
             text: "Login",
             backgroundColor: AppColors.button,
-            onPressed: widget.onLoginPressed, // Callback aufrufen
+            onPressed: widget.onLoginPressed,
           ),
         ],
       ),

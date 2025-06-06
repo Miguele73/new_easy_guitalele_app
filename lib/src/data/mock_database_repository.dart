@@ -246,8 +246,14 @@ class MockDatabaseRepository implements DatabaseRepository {
   }
 
   @override
-  Future<void> resetPassword(String email) {
-    throw UnimplementedError();
+  Future<bool> resetPassword(String email) async {
+    await Future.delayed(const Duration(seconds: 2));
+    if (_users.containsKey(email)) {
+      _users[email] = 'new_password';
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override

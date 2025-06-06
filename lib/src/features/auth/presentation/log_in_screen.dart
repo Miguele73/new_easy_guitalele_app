@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/login_app_bar.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/login_form.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/or_divider.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/sign_up_prompt.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/social_login_button.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/desicion_screen.dart';
@@ -99,16 +100,11 @@ class _LogInScreenState extends State<LogInScreen> {
                 emailController: _emailController,
                 passwordController: _passwordController,
                 onLoginPressed: _login,
+                myRepository: widget.myRepository,
               ),
 
-              Row(
-                spacing: 8,
-                children: const [
-                  Expanded(child: Divider()),
-                  Text("oder"),
-                  Expanded(child: Divider()),
-                ],
-              ),
+              const OrDivider(),
+
               SocialLoginButton(
                 text: "Login mit Apple",
                 backgroundColor: Colors.black,

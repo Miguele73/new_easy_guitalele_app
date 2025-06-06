@@ -30,7 +30,8 @@ class EasyGuitaleleApp extends StatelessWidget {
             (context) => ScaleSelectionScreen(myRepository),
         '/chordListScreen': (context) => ChordListScreen(myRepository),
         '/loginScreen': (context) => LogInScreen(myRepository),
-        '/forgotPasswordScreen': (context) => ForgotPasswordScreen(),
+        '/forgotPasswordScreen':
+            (context) => ForgotPasswordScreen(myRepository),
         'desicionScreen': (context) => DesicionScreen(myRepository),
       },
       debugShowCheckedModeBanner: true,

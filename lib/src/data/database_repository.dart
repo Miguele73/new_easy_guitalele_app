@@ -14,7 +14,7 @@ abstract class DatabaseRepository {
 
   Future<bool> loginUser(String email, String password);
   Future<bool> registerUser(String email, String password);
-  Future<void> resetPassword(String email);
+  Future<bool> resetPassword(String email);
   Future<bool> isUserLoggedIn();
   Future<void> signOut();
 }
