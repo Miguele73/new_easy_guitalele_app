@@ -16,7 +16,7 @@ class _DesicionScreenState extends State<DesicionScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF505160),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         toolbarHeight: 250,
         backgroundColor: const Color(0xFF505160),
         title: Image.asset('assets/logo/logo.png', height: 200, width: 200),

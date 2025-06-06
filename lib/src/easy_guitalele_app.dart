@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/forgot_password_screen.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/log_in_screen.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/chord_list_screen.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/chord_selection_screen.dart';
+import 'package:new_easy_guitalele_app/src/features/screen/desicion_screen.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/scale_selection_screen.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/song_list_screen.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/splash_screen.dart';
@@ -26,9 +29,11 @@ class EasyGuitaleleApp extends StatelessWidget {
         '/scaleSelectionScreen':
             (context) => ScaleSelectionScreen(myRepository),
         '/chordListScreen': (context) => ChordListScreen(myRepository),
+        '/loginScreen': (context) => LogInScreen(myRepository),
+        '/forgotPasswordScreen': (context) => ForgotPasswordScreen(),
+        'desicionScreen': (context) => DesicionScreen(myRepository),
       },
       debugShowCheckedModeBanner: true,
-      home: SplashScreen(myRepository),
     );
   }
 }
