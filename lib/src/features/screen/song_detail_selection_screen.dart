@@ -96,7 +96,7 @@ class _SongDetailSelectionScreenState extends State<SongDetailSelectionScreen> {
                               context,
                               MaterialPageRoute(
                                 builder:
-                                    (context) => ChordsScreen(songName: ''),
+                                    (context) => ChordsScreen(song: song.title),
                               ),
                             );
                           },
