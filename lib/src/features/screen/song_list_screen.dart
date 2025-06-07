@@ -87,6 +87,8 @@ class _SongListScreenState extends State<SongListScreen> {
                                           (context) =>
                                               SongDetailSelectionScreen(
                                                 songName: currentSong.title,
+                                                myRepository:
+                                                    widget.myRepository,
                                               ),
                                     ),
                                   );

@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/one_back_button.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/my_app_bar.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/song/song.dart';
 
 class NotesScreen extends StatelessWidget {
-  final String songName;
-  const NotesScreen({super.key, required this.songName});
+  final Song song;
+  const NotesScreen({super.key, required this.song});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: OneBackButton(padding: EdgeInsets.all(8.0)),
-        title: Text('Noten für $songName'),
-        backgroundColor: const Color(0xFF505160),
-      ),
+      appBar: MyAppBar(automaticallyImplyLeading: true),
       backgroundColor: const Color(0xFF505160),
-      body: Center(child: Text('Zeige Noten für $songName')),
+      body: Center(child: Text('Zeige Noten für $song')),
     );
   }
 }

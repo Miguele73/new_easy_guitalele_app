@@ -3,9 +3,9 @@ import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/chord/chord.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/desicions_box.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/my_app_bar.dart';
-import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/chord_grid_item.dart'; // NEU
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/chord_grid_item.dart';
 import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/chord_diagram_dialog.dart';
-import 'package:new_easy_guitalele_app/src/theme/app_colors.dart'; // NEU
+import 'package:new_easy_guitalele_app/src/theme/app_colors.dart';
 
 class ChordListScreen extends StatefulWidget {
   final DatabaseRepository myRepository;

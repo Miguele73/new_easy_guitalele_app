@@ -17,4 +17,5 @@ abstract class DatabaseRepository {
   Future<bool> resetPassword(String email);
   Future<bool> isUserLoggedIn();
   Future<void> signOut();
+  Future<Song?> getSongByName(String songName);
 }

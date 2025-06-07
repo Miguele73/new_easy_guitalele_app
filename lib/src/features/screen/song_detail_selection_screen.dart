@@ -1,112 +1,115 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/one_back_button.dart';
+import 'package:new_easy_guitalele_app/src/data/database_repository.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/feature_selection_button.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/my_app_bar.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/presentation/widgets/song_info_card.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/chords_screen.dart';
 import 'package:new_easy_guitalele_app/src/features/screen/notes_screen.dart';
+import 'package:new_easy_guitalele_app/src/features/auth/song/song.dart';
+import 'package:new_easy_guitalele_app/src/theme/app_colors.dart';
 
-class SongDetailSelectionScreen extends StatelessWidget {
+class SongDetailSelectionScreen extends StatefulWidget {
+  final DatabaseRepository myRepository;
   final String songName;
 
-  const SongDetailSelectionScreen({super.key, required this.songName});
+  const SongDetailSelectionScreen({
+    super.key,
+    required this.myRepository,
+    required this.songName,
+  });
+
+  @override
+  State<SongDetailSelectionScreen> createState() =>
+      _SongDetailSelectionScreenState();
+}
+
+class _SongDetailSelectionScreenState extends State<SongDetailSelectionScreen> {
+  late Future<Song?> _songFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _songFuture = widget.myRepository.getSongByName(widget.songName);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: OneBackButton(padding: EdgeInsets.all(8.0)),
+      backgroundColor: AppColors.background,
+      appBar: MyAppBar(automaticallyImplyLeading: true),
+      body: FutureBuilder<Song?>(
+        future: _songFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Fehler beim Laden des Songs: ${snapshot.error}'),
+            );
+          } else if (!snapshot.hasData) {
+            return Center(
+              child: Text('Song "${widget.songName}" nicht gefunden.'),
+            );
+          } else {
+            final Song song = snapshot.data!;
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 48.0),
+                    child: Image.asset(
+                      'assets/logo/logo.png',
+                      height: 200,
+                      width: 200,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SongInfoCard(
+                          song: song,
+                          myRepository: widget.myRepository,
+                        ),
 
-        title: Text(songName),
-        backgroundColor: const Color(0xFF505160),
-      ),
+                        const SizedBox(height: 32),
 
-      backgroundColor: const Color(0xFF505160),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 48.0),
-            child: Image.asset('assets/logo/logo.png', height: 200, width: 200),
-          ),
-          const SizedBox(height: 20),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SizedBox(
-                    child: Card(
-                      color: const Color(0xFFBCBABE),
-                      child: ListTile(
-                        title: Text(songName),
-                        leading: const Icon(Icons.music_note),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => SongDetailSelectionScreen(
-                                    songName: songName,
-                                  ),
-                            ),
-                          );
-                        },
-                      ),
+                        FeatureSelectionButton(
+                          text: 'Noten anzeigen',
+                          backgroundColor: AppColors.scales,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NotesScreen(song: song),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 40),
+                        FeatureSelectionButton(
+                          text: 'Akkorde anzeigen',
+                          backgroundColor: AppColors.scales,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => ChordsScreen(songName: ''),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                      ],
                     ),
                   ),
-                ),
-                const SizedBox(height: 32),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFBCBABE),
-                    foregroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 32,
-                      vertical: 16,
-                    ),
-                    textStyle: TextStyle(
-                      fontSize: 20,
-                      fontFamily: GoogleFonts.rye().fontFamily,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NotesScreen(songName: songName),
-                      ),
-                    );
-                  },
-                  child: const Text('Noten anzeigen'),
-                ),
-                const SizedBox(height: 40),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFD5C9B1),
-                    foregroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 32,
-                      vertical: 16,
-                    ),
-                    textStyle: TextStyle(
-                      fontSize: 20,
-                      fontFamily: GoogleFonts.rye().fontFamily,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChordsScreen(songName: songName),
-                      ),
-                    );
-                  },
-                  child: const Text('Akkorde anzeigen'),
-                ),
-                const SizedBox(height: 20),
-              ],
-            ),
-          ),
-        ],
+                ],
+              ),
+            );
+          }
+        },
       ),
     );
   }

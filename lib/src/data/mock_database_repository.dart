@@ -260,4 +260,14 @@ class MockDatabaseRepository implements DatabaseRepository {
   Future<void> signOut() {
     throw UnimplementedError();
   }
+
+  @override
+  Future<Song?> getSongByName(String songName) async {
+    await Future.delayed(const Duration(seconds: 2));
+    try {
+      return songs.firstWhere((song) => song.title == songName);
+    } catch (e) {
+      return null;
+    }
+  }
 }
