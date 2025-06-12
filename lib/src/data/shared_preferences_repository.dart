@@ -22,7 +22,6 @@ class SharedPreferencesRepository implements DatabaseRepository {
     if (!_isInitialized) {
       _prefs = await SharedPreferences.getInstance();
       _isInitialized = true;
-      print('SharedPreferencesRepository: Initialisiert.');
     }
   }
 
@@ -37,10 +36,8 @@ class SharedPreferencesRepository implements DatabaseRepository {
     await _ensureInitialized();
     final String? songsJson = _prefs.getString(_songsKey);
     if (songsJson == null || songsJson.isEmpty) {
-      // Auch wenn der String leer ist
-      // Lade die initialen Mock-Songs, wenn der Speicher leer ist
       final List<Song> initialSongs = _createInitialMockSongs();
-      await _saveSongs(initialSongs); // Speichere sie sofort
+      await _saveSongs(initialSongs);
       return initialSongs;
     }
     final List<dynamic> decodedList = jsonDecode(songsJson);
@@ -85,58 +82,43 @@ class SharedPreferencesRepository implements DatabaseRepository {
   @override
   Future<void> addSongToFavorites(Song song) async {
     await _ensureInitialized();
-    print(
-      'SharedPreferencesRepository: addSongToFavorites not fully implemented.',
-    );
   }
 
   @override
   Future<bool> loginUser(String email, String password) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    // Simuliere hier eine einfache Login-Logik mit SharedPreferences
-    // Eine echte Implementierung würde Hashes speichern und vergleichen
+
     if (email == "test@test.com" && password == "password") {
       await _prefs.setBool(_isLoggedInKey, true);
-      print('SharedPreferencesRepository: User logged in.');
       return true;
     }
-    print('SharedPreferencesRepository: Login failed.');
     return false;
   }
 
   @override
   Future<bool> registerUser(String email, String password) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    // Simuliere hier eine einfache Registrierungslogik mit SharedPreferences
-    // Eine echte Implementierung würde neue Benutzerdaten speichern
-    print('SharedPreferencesRepository: User registered (dummy).');
+
     return true;
   }
 
   @override
   Future<bool> resetPassword(String email) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    print('SharedPreferencesRepository: Password reset (dummy).');
     return true;
   }
 
-  // NEU: Implementierung von isUserLoggedIn
   @override
   Future<bool> isUserLoggedIn() async {
     await _ensureInitialized();
-    return _prefs.getBool(_isLoggedInKey) ??
-        false; // Standardmäßig nicht eingeloggt
+    return _prefs.getBool(_isLoggedInKey) ?? false;
   }
 
-  // NEU: Implementierung von signOut
   @override
   Future<void> signOut() async {
     await _ensureInitialized();
-    await _prefs.remove(_isLoggedInKey); // Entferne den Login-Status
-    print('SharedPreferencesRepository: User signed out.');
+    await _prefs.remove(_isLoggedInKey);
   }
-
-  // --- Hilfsmethoden zum Speichern und Laden (intern) ---
 
   Future<void> _saveSongs(List<Song> songs) async {
     await _ensureInitialized();

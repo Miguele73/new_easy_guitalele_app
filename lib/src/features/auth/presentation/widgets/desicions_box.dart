@@ -44,7 +44,7 @@ class _DesicionsBoxState extends State<DesicionsBox> {
           ],
         ),
         padding: const EdgeInsets.all(8),
-        margin: const EdgeInsets.all(8),
+        margin: const EdgeInsets.all(24),
 
         width: 300,
         child: Row(
@@ -59,6 +59,8 @@ class _DesicionsBoxState extends State<DesicionsBox> {
                   Navigator.pushNamed(context, '/scaleSelectionScreen');
                 } else if (widget.selectionText == 'Chordliste') {
                   Navigator.pushNamed(context, '/chordListScreen');
+                } else if (widget.selectionText == 'Meine Favoriten') {
+                  Navigator.pushNamed(context, '/favoritesScreen');
                 }
               },
               icon: widget.imageIcon,
